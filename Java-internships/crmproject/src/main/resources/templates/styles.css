@@ -1,0 +1,187 @@
+/* styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        
+        .navbar {
+            background-color: #1759f4;
+            color: #fff;
+            padding: 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar-brand {
+            font-size: 1.5em;
+        }
+        
+        .navbar-nav {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        
+        .navbar-nav li {
+            margin-left: 1em;
+        }
+        
+        .navbar-nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        .container {
+            padding: 2em;
+        }
+        
+        .section {
+            margin-bottom: 2em;
+        }
+        
+        .card {
+            background-color: #fff;
+            padding: 1em;
+            margin-bottom: 1em;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card h3 {
+            margin-top: 0;
+        }
+        
+        .contact-form,
+        .sales-form,
+        .task-form,
+        .ticket-form {
+            margin-bottom: 2em;
+        }
+        
+        .contact-form h3,
+        .sales-form h3,
+        .task-form h3,
+        .ticket-form h3 {
+            margin-top: 0;
+        }
+        
+        .contact-form label,
+        .sales-form label,
+        .task-form label,
+        .ticket-form label {
+            display: block;
+            margin: 0.5em 0 0.2em;
+        }
+        
+        .contact-form input,
+        .sales-form input,
+        .task-form input,
+        .ticket-form input,
+        .sales-form select,
+        .task-form select,
+        .ticket-form select,
+        .ticket-form textarea {
+            width: 100%;
+            padding: 0.5em;
+            margin-bottom: 1em;
+            box-sizing: border-box;
+        }
+        
+        .contact-form button,
+        .sales-form button,
+        .task-form button,
+        .ticket-form button {
+            padding: 0.5em 2em;
+            background-color: #13690e;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        .contact-form button:hover,
+        .sales-form button:hover,
+        .task-form button:hover,
+        .ticket-form button:hover {
+            background-color: #555;
+        }
+        
+        .contact-list h3,
+        .sales-list h3,
+        .task-list h3,
+        .ticket-list h3 {
+            margin-top: 0;
+        }
+        
+        .contact-list ul,
+        .sales-list ul,
+        .task-list ul,
+        .ticket-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .contact-list li,
+        .sales-list li,
+        .task-list li,
+        .ticket-list li {
+            background-color: #fff;
+            padding: 1em;
+            margin-bottom: 1em;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .contact-list li div,
+        .sales-list li div,
+        .task-list li div,
+        .ticket-list li div {
+            flex: 1;
+        }
+        
+        .contact-list li button,
+        .sales-list li button,
+        .task-list li button,
+        .ticket-list li button {
+            margin-left: 1em;
+            padding: 0.5em 1em;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        .contact-list li button:hover,
+        .sales-list li button:hover,
+        .task-list li button:hover,
+        .ticket-list li button:hover {
+            background-color: #555;
+        }
+        
+        .pipeline {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .pipeline-stage {
+            width: 16%;
+            background-color: #f8f8f8;
+            padding: 1em;
+            margin: 0.5em;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pipeline-stage h3 {
+            margin-top: 0;
+        }
+        

@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM System</title>
+    <link rel="stylesheet" href="styles.css">
+<style>/* styles.css */
+    @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+            }
+            
+            .navbar {
+                background-color: #1759f4;
+                color: #fff;
+                padding: 1em;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .navbar-brand {
+                font-size: 1.5em;
+            }
+            
+            .navbar-nav {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: flex;
+            }
+            
+            .navbar-nav li {
+                margin-left: 1em;
+            }
+            
+            .navbar-nav a {
+                color: #fff;
+                text-decoration: none;
+            }
+            
+            .container {
+                padding: 2em;
+            }
+            
+            .section {
+                margin-bottom: 2em;
+            }
+            
+            .card {
+                background-color: #fff;
+                padding: 1em;
+                margin-bottom: 1em;
+                border-radius: 5px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            
+            .card h3 {
+                margin-top: 0;
+            }
+            
+            .contact-form,
+            .sales-form,
+            .task-form,
+            .ticket-form {
+                margin-bottom: 2em;
+            }
+            
+            .contact-form h3,
+            .sales-form h3,
+            .task-form h3,
+            .ticket-form h3 {
+                margin-top: 0;
+            }
+            
+            .contact-form label,
+            .sales-form label,
+            .task-form label,
+            .ticket-form label {
+                display: block;
+                margin: 0.5em 0 0.2em;
+            }
+            
+            .contact-form input,
+            .sales-form input,
+            .task-form input,
+            .ticket-form input,
+            .sales-form select,
+            .task-form select,
+            .ticket-form select,
+            .ticket-form textarea {
+                width: 100%;
+                padding: 0.5em;
+                margin-bottom: 1em;
+                box-sizing: border-box;
+            }
+            
+            .contact-form button,
+            .sales-form button,
+            .task-form button,
+            .ticket-form button {
+                padding: 0.5em 2em;
+                background-color: #13690e;
+                color: #fff;
+                border: none;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+            
+            .contact-form button:hover,
+            .sales-form button:hover,
+            .task-form button:hover,
+            .ticket-form button:hover {
+                background-color: #555;
+            }
+            
+            .contact-list h3,
+            .sales-list h3,
+            .task-list h3,
+            .ticket-list h3 {
+                margin-top: 0;
+            }
+            
+            .contact-list ul,
+            .sales-list ul,
+            .task-list ul,
+            .ticket-list ul {
+                list-style: none;
+                padding: 0;
+            }
+            
+            .contact-list li,
+            .sales-list li,
+            .task-list li,
+            .ticket-list li {
+                background-color: #fff;
+                padding: 1em;
+                margin-bottom: 1em;
+                border-radius: 5px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .contact-list li div,
+            .sales-list li div,
+            .task-list li div,
+            .ticket-list li div {
+                flex: 1;
+            }
+            
+            .contact-list li button,
+            .sales-list li button,
+            .task-list li button,
+            .ticket-list li button {
+                margin-left: 1em;
+                padding: 0.5em 1em;
+                background-color: #333;
+                color: #fff;
+                border: none;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+            
+            .contact-list li button:hover,
+            .sales-list li button:hover,
+            .task-list li button:hover,
+            .ticket-list li button:hover {
+                background-color: #555;
+            }
+            
+            .pipeline {
+                display: flex;
+                justify-content: space-between;
+            }
+            
+            .pipeline-stage {
+                width: 16%;
+                background-color: #f8f8f8;
+                padding: 1em;
+                margin: 0.5em;
+                border-radius: 5px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            
+            .pipeline-stage h3 {
+                margin-top: 0;
+            }
+            </style>
+    
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">CRM</div>
+        <ul class="navbar-nav">
+           
+            <li><a href="#contacts">Contacts</a></li>
+            <li><a href="#sales">Sales</a></li>
+            <li><a href="#tasks">Tasks</a></li>
+            <li><a href="#support">Support</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+       
+        <section id="contacts" class="section">
+            <h2>Contacts</h2>
+            <div class="contact-form">
+                <h3>Add New Contact</h3>
+                <form id="contactForm">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" name="address" required>
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                    
+                    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="socialMedia">Social Media:</label>
+                    <input type="text" id="socialMedia" name="socialMedia" required>
+                    <button type="submit">Add Contact</button>
+                </form>
+            </div>
+            <div class="contact-list">
+                <h3>Contact List</h3>
+                <ul id="contactsList"></ul>
+            </div>
+        </section>
+        <section id="sales" class="section">
+            <h2>Sales Pipeline</h2>
+            <div class="sales-form">
+                <h3>Add New Sales Opportunity</h3>
+                <form id="salesForm">
+                    <label for="opportunityName">Opportunity Name:</label>
+                    <input type="text" id="opportunityName" name="opportunityName" required>
+                    <label for="customerName">Customer Name:</label>
+                    <input type="text" id="customerName" name="customerName" required>
+                    <label for="amount">Amount:</label>
+                    <input type="number" id="amount" name="amount" required>
+                    <label for="stage">Stage:</label>
+                    <select id="stage" name="stage" required>
+                        <option value="Prospect">Prospect</option>
+                        <option value="Qualification">Qualification</option>
+                        <option value="Proposal">Proposal</option>
+                        <option value="Negotiation">Negotiation</option>
+                        <option value="Closed Won">Closed Won</option>
+                        <option value="Closed Lost">Closed Lost</option>
+                    </select>
+                    <button type="submit">Add Opportunity</button>
+                </form>
+            </div>
+            <div class="pipeline">
+                <div class="pipeline-stage" id="Prospect">
+                    <h3>Prospect</h3>
+                    <ul class="stage-list"></ul>
+                </div>
+                <div class="pipeline-stage" id="Qualification">
+                    <h3>Qualification</h3>
+                    <ul class="stage-list"></ul>
+                </div>
+                <div class="pipeline-stage" id="Proposal">
+                    <h3>Proposal</h3>
+                    <ul class="stage-list"></ul>
+                </div>
+                <div class="pipeline-stage" id="Negotiation">
+                    <h3>Negotiation</h3>
+                    <ul class="stage-list"></ul>
+                </div>
+                <div class="pipeline-stage" id="ClosedWon">
+                    <h3>Closed Won</h3>
+                    <ul class="stage-list"></ul>
+                </div>
+                <div class="pipeline-stage" id="ClosedLost">
+                    <h3>Closed Lost</h3>
+                    <ul class="stage-list"></ul>
+                </div>
+            </div>
+        </section>
+        <section id="tasks" class="section">
+            <h2>Tasks</h2>
+            <div class="task-form">
+                <h3>Add New Task</h3>
+                <form id="taskForm">
+                    <label for="taskName">Task Name:</label>
+                    <input type="text" id="taskName" name="taskName" required>
+                    <label for="relatedTo">Related To:</label>
+                    <select id="relatedTo" name="relatedTo" required>
+                        <option value="Contact">Contact</option>
+                        <option value="Sales Opportunity">Sales Opportunity</option>
+                    </select>
+                    <label for="relatedId">Related ID:</label>
+                    <input type="text" id="relatedId" name="relatedId" required>
+                    <label for="dueDate">Due Date:</label>
+                    <input type="date" id="dueDate" name="dueDate" required>
+                    <button type="submit">Add Task</button>
+                </form>
+            </div>
+            <div class="task-list">
+                <h3>Task List</h3>
+                <ul id="tasksList"></ul>
+            </div>
+        </section>
+        <section id="support" class="section">
+            <h2>Customer Support</h2>
+            <div class="ticket-form">
+                <h3>Create Support Ticket</h3>
+                <form id="ticketForm">
+                    <label for="ticketTitle">Title:</label>
+                    <input type="text" id="ticketTitle" name="ticketTitle" required>
+                    <label for="ticketDescription">Description:</label>
+                    <textarea id="ticketDescription" name="ticketDescription" required></textarea>
+                    <label for="ticketPriority">Priority:</label>
+                    <select id="ticketPriority" name="ticketPriority" required>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                    <label for="ticketStatus">Status:</label>
+                    <select id="ticketStatus" name="ticketStatus" required>
+                        <option value="Open">Open</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Resolved">Resolved</option>
+                        <option value="Closed">Closed</option>
+                    </select>
+                    <button type="submit">Create Ticket</button>
+                </form>
+            </div>
+            <div class="ticket-list">
+                <h3>Ticket List</h3>
+                <ul id="ticketsList"></ul>
+            </div>
+        </section>
+    </div>
+   <script>document.addEventListener('DOMContentLoaded', function () {
+    const navLinks = document.querySelectorAll('.navbar-nav a');
+    const sections = document.querySelectorAll('.section');
+    const contactForm = document.getElementById('contactForm');
+    const contactsList = document.getElementById('contactsList');
+    const salesForm = document.getElementById('salesForm');
+    const salesLists = document.querySelectorAll('.stage-list');
+    const taskForm = document.getElementById('taskForm');
+    const tasksList = document.getElementById('tasksList');
+    const supportForm = document.getElementById('supportForm');
+    const supportList = document.getElementById('supportList');
+    let contacts = [];
+    let sales = [];
+    let tasks = [];
+    let tickets = [];
+
+    // Event listeners for navigation links
+    navLinks.forEach(link => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            sections.forEach(section => {
+                section.style.display = section.id === targetId ? 'block' : 'none';
+            });
+        });
+    });
+
+    // Show the first section by default
+    sections.forEach((section, index) => {
+        section.style.display = index === 0 ? 'block' : 'none';
+    });
+
+    // Function to fetch contacts from the backend
+    function fetchContacts() {
+        fetch('/api/contacts')
+            .then(response => response.json())
+            .then(data => {
+                contacts = data;
+                renderContacts();
+            })
+            .catch(error => console.error('Error fetching contacts:', error));
+    }
+
+    // Function to render contacts in the UI
+    function renderContacts() {
+        contactsList.innerHTML = '';
+        contacts.forEach((contact, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                
+            
+            <style>.container {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+h2 {
+  font-size: 26px;
+  margin: 20px 0;
+  text-align: center;
+  small {
+    font-size: 0.5em;
+  }
+}
+
+.responsive-table {
+  li {
+    border-radius: 3px;
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+  }
+  .table-header {
+    background-color: #95A5A6;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .table-row {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+  }
+  .col-1 {
+    flex-basis: 25%;
+  }
+  .col-2 {
+    flex-basis: 25%;
+  }
+  .col-3 {
+    flex-basis: 30%;
+  }
+  .col-4 {
+    flex-basis: 40%;
+  }
+     .col-5 {
+    flex-basis: 15%;
+  }
+     .col-6 {
+    flex-basis: 25%;
+  }
+  
+  @media all and (max-width: 767px) {
+    .table-header {
+      display: none;
+    }
+    .table-row{
+      
+    }
+    li {
+      display: block;
+    }
+    .col {
+      
+      flex-basis: 100%;
+      
+    }
+    .col {
+      display: flex;
+      padding: 10px 0;
+      &:before {
+        color: #6C7A89;
+        padding-right: 10px;
+        content: attr(data-label);
+        flex-basis: 50%;
+        text-align: right;
+      }
+    }
+  }
+}</style>
+            <div class="container">
+  
+  <ul class="responsive-table">
+    <li class="table-header">
+        <div class="col col-1">Name</div>
+      <div class="col col-2">Address</div>
+      <div class="col col-3">Phone</div>
+      <div class="col col-4">Email</div>
+      <div class="col col-5">Social Media</div>
+      <div class="col col-6">Action</div>
+
+    </li>
+    <li class="table-row">
+      <div class="col col-1" data-label="Name">${contact.name}</div>
+      <div class="col col-2" data-label="Address"> ${contact.address}</div>
+      <div class="col col-3" data-label="Phone">${contact.phone}</div>
+      <div class="col col-4" data-label="Email">${contact.email}</div>
+      <div class="col col-5" data-label="Social Media">${contact.socialMedia}</div>
+       <div class="col col-6" data-label="Action">          <button onclick="editContact(${index})">Edit</button>
+                <button onclick="deleteContact(${contact.id})">Delete</button></div>
+    </li>
+    
+  </ul>
+</div>    
+
+
+`;
+            contactsList.appendChild(li);
+        });
+    }
+
+    // Fetch contacts when the page loads
+    fetchContacts();
+
+    // Event listener for adding a new contact
+    contactForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const formData = new FormData(contactForm);
+        const newContact = {
+            name: formData.get('name'),
+            address: formData.get('address'),
+            phone: formData.get('phone'),
+            email: formData.get('email'),
+            socialMedia: formData.get('socialMedia')
+        };
+
+        // Send POST request to add contact
+        fetch('/api/contacts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newContact)
+        })
+        .then(response => response.json())
+        .then(data => {
+            contacts.push(data); // Add the newly created contact to the local array
+            renderContacts();
+            contactForm.reset();
+        })
+        .catch(error => console.error('Error adding contact:', error));
+    });
+
+    // Function to edit a contact
+    window.editContact = function (index) {
+        const contact = contacts[index];
+        contactForm.name.value = contact.name;
+        contactForm.address.value = contact.address;
+        contactForm.phone.value = contact.phone;
+        contactForm.email.value = contact.email;
+        contactForm.socialMedia.value = contact.socialMedia;
+
+        contactForm.onsubmit = function (event) {
+            event.preventDefault();
+            const formData = new FormData(contactForm);
+            const updatedContact = {
+                id: contact.id,
+                name: formData.get('name'),
+                address: formData.get('address'),
+                phone: formData.get('phone'),
+                email: formData.get('email'),
+                socialMedia: formData.get('socialMedia')
+            };
+
+            // Send PUT request to update contact
+            fetch(`/api/contacts/${contact.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedContact)
+            })
+            .then(response => response.json())
+            .then(data => {
+                contacts[index] = data; // Update the local array with the updated contact
+                renderContacts();
+                contactForm.reset();
+            })
+            .catch(error => console.error('Error updating contact:', error));
+        };
+    };
+
+    // Function to delete a contact
+    window.deleteContact = function (contactId) {
+        // Send DELETE request to delete contact
+        fetch(`/api/contacts/${contactId}`, {
+            method: 'DELETE'
+        })
+        .then(() => {
+            contacts = contacts.filter(contact => contact.id !== contactId); // Remove the contact from the local array
+            renderContacts();
+        })
+        .catch(error => console.error('Error deleting contact:', error));
+    };
+
+    // Function to fetch sales from the backend
+    function fetchSales() {
+        fetch('/api/sales')
+            .then(response => response.json())
+            .then(data => {
+                sales = data;
+                renderSales();
+            })
+            .catch(error => console.error('Error fetching sales:', error));
+    }
+
+    // Function to render sales in the UI
+    function renderSales() {
+        salesLists.forEach(list => list.innerHTML = '');
+        sales.forEach((sale, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div>
+                    <strong>${sale.opportunityName}</strong><br>
+                    Customer: ${sale.customerName}<br>
+                    Amount: $${sale.amount}<br>
+                    Stage: ${sale.stage}
+                </div>
+                <button onclick="editSale(${index})">Edit</button>
+                <button onclick="deleteSale(${sale.id})">Delete</button>
+            `;
+            document.getElementById(sale.stage.replace(" ", "")).querySelector('.stage-list').appendChild(li);
+        });
+    }
+
+    // Fetch sales when the page loads
+    fetchSales();
+
+    // Event listener for adding a new sale
+    salesForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const formData = new FormData(salesForm);
+        const newSale = {
+            opportunityName: formData.get('opportunityName'),
+            customerName: formData.get('customerName'),
+            amount: formData.get('amount'),
+            stage: formData.get('stage')
+        };
+
+        // Send POST request to add sale
+        fetch('/api/sales', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newSale)
+        })
+        .then(response => response.json())
+        .then(data => {
+            sales.push(data); // Add the newly created sale to the local array
+            renderSales();
+            salesForm.reset();
+        })
+        .catch(error => console.error('Error adding sale:', error));
+    });
+
+    // Function to edit a sale
+    window.editSale = function (index) {
+        const sale = sales[index];
+        salesForm.opportunityName.value = sale.opportunityName;
+        salesForm.customerName.value = sale.customerName;
+        salesForm.amount.value = sale.amount;
+        salesForm.stage.value = sale.stage;
+
+        salesForm.onsubmit = function (event) {
+            event.preventDefault();
+            const formData = new FormData(salesForm);
+            const updatedSale = {
+                id: sale.id,
+                opportunityName: formData.get('opportunityName'),
+                customerName: formData.get('customerName'),
+                amount: formData.get('amount'),
+                stage: formData.get('stage')
+            };
+
+            // Send PUT request to update sale
+            fetch(`/api/sales/${sale.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedSale)
+            })
+            .then(response => response.json())
+            .then(data => {
+                sales[index] = data; // Update the local array with the updated sale
+                renderSales();
+                salesForm.reset();
+            })
+            .catch(error => console.error('Error updating sale:', error));
+        };
+    };
+
+    // Function to delete a sale
+    window.deleteSale = function (saleId) {
+        // Send DELETE request to delete sale
+        fetch(`/api/sales/${saleId}`, {
+            method: 'DELETE'
+        })
+        .then(() => {
+            sales = sales.filter(sale => sale.id !== saleId); // Remove the sale from the local array
+            renderSales();
+        })
+        .catch(error => console.error('Error deleting sale:', error));
+    };
+
+    // Function to fetch tasks from the backend
+    function fetchTasks() {
+        fetch('/api/tasks')
+            .then(response => response.json())
+            .then(data => {
+                tasks = data;
+                renderTasks();
+            })
+            .catch(error => console.error('Error fetching tasks:', error));
+    }
+
+    // Function to render tasks in the UI
+    function renderTasks() {
+        tasksList.innerHTML = '';
+        tasks.forEach((task, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div>
+                    <strong>${task.taskName}</strong><br>
+                    Related To: ${task.relatedTo}<br>
+                    Related ID: ${task.relatedId}<br>
+                    Due Date: ${task.dueDate}
+                </div>
+                <button onclick="editTask(${index})">Edit</button>
+                <button onclick="deleteTask(${task.id})">Delete</button>
+            `;
+            tasksList.appendChild(li);
+        });
+    }
+
+    // Fetch tasks when the page loads
+    fetchTasks();
+
+    // Event listener for adding a new task
+    taskForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const formData = new FormData(taskForm);
+        const newTask = {
+            taskName: formData.get('taskName'),
+            relatedTo: formData.get('relatedTo'),
+            relatedId: formData.get('relatedId'),
+            dueDate: formData.get('dueDate')
+        };
+
+        // Send POST request to add task
+        fetch('/api/tasks', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newTask)
+        })
+        .then(response => response.json())
+        .then(data => {
+            tasks.push(data); // Add the newly created task to the local array
+            renderTasks();
+            taskForm.reset();
+        })
+        .catch(error => console.error('Error adding task:', error));
+    });
+
+    // Function to edit a task
+    window.editTask = function (index) {
+        const task = tasks[index];
+        taskForm.taskName.value = task.taskName;
+        taskForm.relatedTo.value = task.relatedTo;
+        taskForm.relatedId.value = task.relatedId;
+        taskForm.dueDate.value = task.dueDate;
+
+        taskForm.onsubmit = function (event) {
+            event.preventDefault();
+            const formData = new FormData(taskForm);
+            const updatedTask = {
+                id: task.id,
+                taskName: formData.get('taskName'),
+                relatedTo: formData.get('relatedTo'),
+                relatedId: formData.get('relatedId'),
+                dueDate: formData.get('dueDate')
+            };
+
+            // Send PUT request to update task
+            fetch(`/api/tasks/${task.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedTask)
+            })
+            .then(response => response.json())
+            .then(data => {
+                tasks[index] = data; // Update the local array with the updated task
+                renderTasks();
+                taskForm.reset();
+            })
+            .catch(error => console.error('Error updating task:', error));
+        };
+    };
+
+    // Function to delete a task
+    window.deleteTask = function (taskId) {
+        // Send DELETE request to delete task
+        fetch(`/api/tasks/${taskId}`, {
+            method: 'DELETE'
+        })
+        .then(() => {
+            tasks = tasks.filter(task => task.id !== taskId); // Remove the task from the local array
+            renderTasks();
+        })
+        .catch(error => console.error('Error deleting task:', error));
+    };
+
+    // Function to fetch support tickets from the backend
+    function fetchSupportTickets() {
+        fetch('/api/supporttickets')
+            .then(response => response.json())
+            .then(data => {
+                tickets = data;
+                renderSupportTickets();
+            })
+            .catch(error => console.error('Error fetching support tickets:', error));
+    }
+
+    // Function to render support tickets in the UI
+    function renderSupportTickets() {
+        supportList.innerHTML = '';
+        tickets.forEach((ticket, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div>
+                    <strong>${ticket.subject}</strong><br>
+                    Status: ${ticket.status}<br>
+                    Priority: ${ticket.priority}<br>
+                    Description: ${ticket.description}
+                </div>
+                <button onclick="editSupportTicket(${index})">Edit</button>
+                <button onclick="deleteSupportTicket(${ticket.id})">Delete</button>
+            `;
+            supportList.appendChild(li);
+        });
+    }
+
+    // Fetch support tickets when the page loads
+    fetchSupportTickets();
+
+    // Event listener for adding a new support ticket
+    supportForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const formData = new FormData(supportForm);
+        const newTicket = {
+            subject: formData.get('subject'),
+            status: formData.get('status'),
+            priority: formData.get('priority'),
+            description: formData.get('description')
+        };
+
+        // Send POST request to add support ticket
+        fetch('/api/supporttickets', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newTicket)
+        })
+        .then(response => response.json())
+        .then(data => {
+            tickets.push(data); // Add the newly created support ticket to the local array
+            renderSupportTickets();
+            supportForm.reset();
+        })
+        .catch(error => console.error('Error adding support ticket:', error));
+    });
+
+    // Function to edit a support ticket
+    window.editSupportTicket = function (index) {
+        const ticket = tickets[index];
+        supportForm.subject.value = ticket.subject;
+        supportForm.status.value = ticket.status;
+        supportForm.priority.value = ticket.priority;
+        supportForm.description.value = ticket.description;
+
+        supportForm.onsubmit = function (event) {
+            event.preventDefault();
+            const formData = new FormData(supportForm);
+            const updatedTicket = {
+                id: ticket.id,
+                subject: formData.get('subject'),
+                status: formData.get('status'),
+                priority: formData.get('priority'),
+                description: formData.get('description')
+            };
+
+            // Send PUT request to update support ticket
+            fetch(`/api/supporttickets/${ticket.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedTicket)
+            })
+            .then(response => response.json())
+            .then(data => {
+                tickets[index] = data; // Update the local array with the updated support ticket
+                renderSupportTickets();
+                supportForm.reset();
+            })
+            .catch(error => console.error('Error updating support ticket:', error));
+        };
+    };
+
+    // Function to delete a support ticket
+    window.deleteSupportTicket = function (ticketId) {
+        // Send DELETE request to delete support ticket
+        fetch(`/api/supporttickets/${ticketId}`, {
+            method: 'DELETE'
+        })
+        .then(() => {
+            tickets = tickets.filter(ticket => ticket.id !== ticketId); // Remove the support ticket from the local array
+            renderSupportTickets();
+        })
+        .catch(error => console.error('Error deleting support ticket:', error));
+    };
+});
+</script>
+</body>
+</html>
